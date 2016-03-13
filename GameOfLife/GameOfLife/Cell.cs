@@ -13,7 +13,7 @@ public class RulesOfLife
 {
     public static bool WhatsNext(Cell currentCell, int aliveNeighbours)
     {
-        if (currentCell.IsAlive && aliveNeighbours <= 2)
+        if (currentCell.IsAlive && aliveNeighbours < 2)
             return false;
         return true;
     }

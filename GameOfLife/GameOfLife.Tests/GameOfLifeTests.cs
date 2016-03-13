@@ -12,7 +12,7 @@ namespace GameOfLife.Tests
     {
        
             [Test]
-            public void GameOfLifeTestMethod()
+            public void WhenOneNeighbourIsAliveAndCellIsAliveIsDying()
             {
                 Cell currentCell = new Cell() { IsAlive = true };
 
@@ -20,8 +20,17 @@ namespace GameOfLife.Tests
 
                 Assert.IsFalse(result);
             }
+        [Test]
+        public void WhenTwoNeighboursAliveAndCellIsAliveCellStaysAlive()
+        {
+            Cell currentCell = new Cell() { IsAlive = true };
 
-           
-    
-}
+            bool result = RulesOfLife.WhatsNext(currentCell, 2);
+
+            Assert.IsTrue(result);
+        }
+
+
+
+    }
 }

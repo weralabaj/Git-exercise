@@ -135,7 +135,7 @@ namespace GameOfLife.Tests
 
 
     [TestFixture]
-    public class RulesOfLife
+    public class RulesOfLifeTest
     {
         [Test]
         public void Test4()
