@@ -29,8 +29,39 @@ namespace GameOfLife.Tests
 
             Assert.IsTrue(result);
         }
+        //jesli zywa i > 3 to umiera
+        [Test]
+        public void WhenCellIsAliveAndMoreThanThreeNeigboursIsDying()
+        {
+            Cell currentCell = new Cell() { IsAlive = true };
+
+            bool result = RulesOfLife.WhatsNext(currentCell, 4);
+
+            Assert.IsFalse(result);
 
 
+        }
+        //jesli sasiedzi == 3 i martwa to zywa
+        [Test]
+        public void WhenCellHasThreeNeighboursAndIsDeadIsAlive()
+        {
+            Cell currentCell = new Cell() { IsAlive = false };
+
+            bool result = RulesOfLife.WhatsNext(currentCell, 3);
+
+            Assert.IsTrue(result);
+
+
+        }
+
+        //komorka martwa i != 3 sasiadow to zostaje martwa
+        [Test]
+        public void WhenCellIsDeadAndNumberIsDifferentThanThreeCellIsDead()
+        {
+         
+
+
+        }
 
     }
 }
