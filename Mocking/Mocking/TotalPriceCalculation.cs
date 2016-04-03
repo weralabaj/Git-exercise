@@ -1,4 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Net.Http.Headers;
+using CreditScoring;
+using Domain;
+using NUnit.Framework;
 
 namespace Tests
 {
@@ -10,6 +15,19 @@ namespace Tests
         [Test]
         public void change_my_name()
         {
+            var hlep = new Product()
+            {SKU = 1, Name = "bread", Price = 1.0m};
+            var lineItem = new LineItem();
+            lineItem.Product = hlep;
+            lineItem.Quantity = 2;
+
+            var PriceCalculator = new PriceCalculator(new PromotionsService());
+            var List = new List<LineItem>() {lineItem};
+            var total = PriceCalculator.GetTotalPrice(List);
+
+            Assert.AreEqual(1, total);
+           
+           
         }
 
         //Given that Bread is on 'BuyOneGetOneFor1Cent' promotion

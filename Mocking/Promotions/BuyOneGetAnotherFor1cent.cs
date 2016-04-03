@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Domain;
 
 namespace Promotions
@@ -8,6 +9,14 @@ namespace Promotions
         public decimal ApplyPromotion(decimal productPrice, int productsQuantity)
         {
             return (productPrice * productsQuantity / 2) + (productsQuantity % 2 * 0.01m);
+        }
+    }
+
+    public class BuyTwoGetOneFree : IPromotion
+    {
+        public decimal ApplyPromotion(decimal productPrice, int productsQuantity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
