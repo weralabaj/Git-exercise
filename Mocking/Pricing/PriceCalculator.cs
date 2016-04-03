@@ -6,11 +6,11 @@ namespace CreditScoring
 {
     public class PriceCalculator
     {
-        PromotionsService promotionsService;
+        iPromotionsService _iPromotionsService;
 
-        public PriceCalculator(PromotionsService promotionsService)
+        public PriceCalculator(iPromotionsService _iPromotionsService)
         {
-            this.promotionsService = promotionsService;
+            this._iPromotionsService = _iPromotionsService;
         }
 
         
@@ -23,7 +23,7 @@ namespace CreditScoring
             foreach (var sku in uniqueSKUs)
             {
                 var lineItem = products.Single(li => li.Product.SKU == sku);
-                var promotion = promotionsService.GetPromotionFor(sku);
+                var promotion = _iPromotionsService.GetPromotionFor(sku);
 
                 if (promotion != null)
                     totalPrice += promotion.ApplyPromotion(lineItem.Product.Price, lineItem.Quantity);

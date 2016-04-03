@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using CreditScoring;
 using Domain;
 using NUnit.Framework;
 using Promotions;
+using Rhino.Mocks;
 using Rhino.Mocks.Constraints;
 
 namespace Tests
@@ -19,15 +21,15 @@ namespace Tests
 
             
             Product breed = new Product() {SKU = 5,Name = "Chleb",Price = 2};
-           
             LineItem lItem = new LineItem() {Product = breed,Quantity = 2};
             var list = new List<LineItem>
             {
                 lItem
             };
 
-
-            PriceCalculator pCalculator =  new PriceCalculator(new MyPromotionService());
+            MyIPromotionService promService = MockRepository.GenerateStub<MyIPromotionService>();
+            promService.Stub(x=>x.GetPromotionFor(1)).Return(new BuyOneGetOneFree());
+            PriceCalculator pCalculator =  new PriceCalculator(promService);
             var startPrice = pCalculator.GetTotalPrice(list);
             
             Assert.AreEqual(2m,startPrice);
@@ -35,29 +37,22 @@ namespace Tests
 
         }
 
-        class MyPromotionService : PromotionsService
+        class MyIPromotionService : iPromotionsService
         {
-            public override IPromotion GetPromotionFor(int SKU)
+            public IPromotion GetPromotionFor(int SKU)
             {
-
-
                 return new BuyOneGetOneFree();
-
-
             }
-
-
+            
         }
 
-        class MySecondPromotionService : PromotionsService
+        class MySecondIPromotionService : iPromotionsService
         {
-            public override IPromotion GetPromotionFor(int SKU)
+            public IPromotion GetPromotionFor(int SKU)
             {
-
-
+                
                 return new BuyOneGetOneFree();
-
-
+                
             }
 
 
@@ -77,7 +72,7 @@ namespace Tests
             };
 
 
-            PriceCalculator pCalculator = new PriceCalculator(new MyPromotionService());
+            PriceCalculator pCalculator = new PriceCalculator(new MyIPromotionService());
             var startPrice = pCalculator.GetTotalPrice(list);
 
             Assert.AreEqual(2.01m, startPrice);
