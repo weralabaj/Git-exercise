@@ -7,7 +7,7 @@ namespace Promotions
     {
         public decimal ApplyPromotion(decimal productPrice, int productsQuantity)
         {
-            return (productPrice * productsQuantity / 2) + (productsQuantity % 2 * 0.01m);
+            return (productPrice * productsQuantity / 2) + (productsQuantity - productsQuantity/2 * 0.01m);
         }
     }
 }

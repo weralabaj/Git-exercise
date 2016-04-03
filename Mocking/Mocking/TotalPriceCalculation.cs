@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using CreditScoring;
 using Domain;
 using NUnit.Framework;
+using Promotions;
 using Rhino.Mocks.Constraints;
 
 namespace Tests
@@ -26,12 +27,38 @@ namespace Tests
             };
 
 
-            PriceCalculator pCalculator =  new PriceCalculator(new PromotionsService());
+            PriceCalculator pCalculator =  new PriceCalculator(new MyPromotionService());
             var startPrice = pCalculator.GetTotalPrice(list);
             
-            Assert.AreEqual(1,startPrice);
+            Assert.AreEqual(2m,startPrice);
+            
+
+        }
+
+        class MyPromotionService : PromotionsService
+        {
+            public override IPromotion GetPromotionFor(int SKU)
+            {
 
 
+                return new BuyOneGetOneFree();
+
+
+            }
+
+
+        }
+
+        class MySecondPromotionService : PromotionsService
+        {
+            public override IPromotion GetPromotionFor(int SKU)
+            {
+
+
+                return new BuyOneGetOneFree();
+
+
+            }
 
 
         }
@@ -42,6 +69,19 @@ namespace Tests
         [Test]
         public void change_my_name_too()
         {
+            Product breed = new Product() { SKU = 5, Name = "Chleb", Price = 2 };
+            LineItem lItem = new LineItem() { Product = breed, Quantity = 2 };
+            var list = new List<LineItem>
+            {
+                lItem
+            };
+
+
+            PriceCalculator pCalculator = new PriceCalculator(new MyPromotionService());
+            var startPrice = pCalculator.GetTotalPrice(list);
+
+            Assert.AreEqual(2.01m, startPrice);
+
         }
     }
 }
