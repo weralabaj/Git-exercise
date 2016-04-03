@@ -2,7 +2,7 @@
 {
     public class PromotionsService
     {
-        public IPromotion GetPromotionFor(int SKU)
+        public virtual IPromotion GetPromotionFor(int SKU)
         {
             return null;
         }
