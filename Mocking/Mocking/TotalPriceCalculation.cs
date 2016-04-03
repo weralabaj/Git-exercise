@@ -25,7 +25,7 @@ namespace Tests
             var List = new List<LineItem>() {lineItem};
             var total = PriceCalculator.GetTotalPrice(List);
 
-            Assert.AreEqual(1, total);
+            Assert.AreEqual(1m, total);
            
            
         }
@@ -36,6 +36,17 @@ namespace Tests
         [Test]
         public void change_my_name_too()
         {
+            var hlep = new Product()
+            { SKU = 1, Name = "bread", Price = 1.0m };
+            var lineItem = new LineItem();
+            lineItem.Product = hlep;
+            lineItem.Quantity = 2;
+
+            var PriceCalculator = new PriceCalculator(new PromotionsService());
+            var List = new List<LineItem>() { lineItem };
+            var total = PriceCalculator.GetTotalPrice(List);
+
+            Assert.AreEqual(1.01m, total);
         }
     }
 }
