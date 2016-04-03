@@ -13,6 +13,8 @@ namespace CreditScoring
             this.promotionsService = promotionsService;
         }
 
+        
+
         public decimal GetTotalPrice(List<LineItem> products)
         {
             var uniqueSKUs = products.Select(p => p.Product.SKU).Distinct();

@@ -1,4 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.Net.Http.Headers;
+using CreditScoring;
+using Domain;
+using NUnit.Framework;
+using Rhino.Mocks.Constraints;
 
 namespace Tests
 {
@@ -10,6 +15,25 @@ namespace Tests
         [Test]
         public void change_my_name()
         {
+
+            
+            Product breed = new Product() {SKU = 5,Name = "Chleb",Price = 2};
+           
+            LineItem lItem = new LineItem() {Product = breed,Quantity = 2};
+            var list = new List<LineItem>
+            {
+                lItem
+            };
+
+
+            PriceCalculator pCalculator =  new PriceCalculator(new PromotionsService());
+            var startPrice = pCalculator.GetTotalPrice(list);
+            
+            Assert.AreEqual(1,startPrice);
+
+
+
+
         }
 
         //Given that Bread is on 'BuyOneGetOneFor1Cent' promotion

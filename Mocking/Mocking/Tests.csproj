@@ -54,6 +54,20 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{525A00D2-2496-4035-8650-0BE3F73236D7}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pricing\Pricing.csproj">
+      <Project>{c4313c91-c5f9-4eb2-b3b1-0caff0b35512}</Project>
+      <Name>Pricing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Promotions\Promotions.csproj">
+      <Project>{f2f933ef-3157-4708-8541-10f6267b034e}</Project>
+      <Name>Promotions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
