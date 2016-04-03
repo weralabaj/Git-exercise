@@ -6,9 +6,9 @@ namespace CreditScoring
 {
     public class PriceCalculator
     {
-        PromotionsService promotionsService;
+        IPromotionsService promotionsService;
 
-        public PriceCalculator(PromotionsService promotionsService)
+        public PriceCalculator(IPromotionsService promotionsService)
         {
             this.promotionsService = promotionsService;
         }

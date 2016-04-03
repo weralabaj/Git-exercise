@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPromotion.cs" />
-    <Compile Include="PromotionsService.cs" />
+    <Compile Include="IPromotionsService.cs" />
     <Compile Include="LineItem.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,10 +2,12 @@
 using System.IO;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using CreditScoring;
 using Domain;
 using NUnit.Framework;
 using Promotions;
+using Rhino.Mocks;
 using Rhino.Mocks.Constraints;
 
 namespace Tests
@@ -33,9 +35,9 @@ namespace Tests
             
         }
 
-        class MyPromotionsService : PromotionsService
+        class MyPromotionsService : IPromotionsService //Stub method
         {
-            public override IPromotion GetPromotionFor(int SKU)
+            public IPromotion GetPromotionFor(int SKU)
             {
                return new BuyOneGetOneFree();
             }
@@ -54,20 +56,15 @@ namespace Tests
             lineItem.Product = hlep;
             lineItem.Quantity = 2;
 
-            var PriceCalculator = new PriceCalculator(new MySecondPromotionsService());
+            var Service = MockRepository.GenerateStub<IPromotionsService>();
+            Service.Stub(x=>x.GetPromotionFor(1)).Return(new BuyOneGetAnotherFor1Cent()); 
+            var PriceCalculator = new PriceCalculator(Service);
             var List = new List<LineItem>() { lineItem };
             var total = PriceCalculator.GetTotalPrice(List);
 
             Assert.AreEqual(1.01m, total);
         }
 
-        class MySecondPromotionsService : PromotionsService
-        {
-            public override IPromotion GetPromotionFor(int SKU)
-            {
-                return new BuyOneGetAnotherFor1Cent();
-            }
-        }
-
+      
     }
 }
