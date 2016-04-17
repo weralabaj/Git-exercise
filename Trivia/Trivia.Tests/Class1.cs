@@ -7,11 +7,11 @@ namespace Trivia.Tests
     [TestFixture]
     public class GenerateFile
     {
-        private string _currentResult = @"C:\Praktyki\trivia-master\C#\Trivia\CurrentOutput.txt";
-        private string _expectedResult = @"C:\Praktyki\trivia-master\C#\Trivia\SampleOutput.txt";
+        private string _currentResult = @".\CurrentOutput.txt";
+        private string _expectedResult = @".\SampleOutput.txt";
 
         [Test]
-        [Ignore("Has to be run explicilty")]
+        [Explicit]
         public void PrepareData()
         {
             StreamWriter writer;
