@@ -45,9 +45,8 @@ namespace UglyTrivia
         {
 
 
-            players.Add(new Player() {Name = playerName});
+            players.Add(new Player() {Name = playerName, Purse = 0});
             places[howManyPlayers()] = 0;
-            purses[howManyPlayers()] = 0;
             inPenaltyBox[howManyPlayers()] = false;
 
             Console.WriteLine(playerName + " was added");
@@ -149,10 +148,10 @@ namespace UglyTrivia
                 if (isGettingOutOfPenaltyBox)
                 {
                     Console.WriteLine("Answer was correct!!!!");
-                    purses[currentPlayer]++;
+                    players[currentPlayer].Purse++;
                     Console.WriteLine(players[currentPlayer].Name
                             + " now has "
-                            + purses[currentPlayer]
+                            + players[currentPlayer].Purse
                             + " Gold Coins.");
 
                     bool winner = didPlayerWin();
@@ -175,10 +174,10 @@ namespace UglyTrivia
             {
 
                 Console.WriteLine("Answer was corrent!!!!");
-                purses[currentPlayer]++;
+                players[currentPlayer].Purse++;
                 Console.WriteLine(players[currentPlayer].Name
                         + " now has "
-                        + purses[currentPlayer]
+                        + players[currentPlayer].Purse
                         + " Gold Coins.");
 
                 bool winner = didPlayerWin();
@@ -203,7 +202,7 @@ namespace UglyTrivia
 
         private bool didPlayerWin()
         {
-            return !(purses[currentPlayer] == 6);
+            return !(players[currentPlayer].Purse == 6);
         }
     }
 

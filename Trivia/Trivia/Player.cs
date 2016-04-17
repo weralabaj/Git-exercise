@@ -9,5 +9,6 @@ namespace Trivia
     public class Player
     {
         public string Name { get; set; }
+        public int Purse { get; set; }
     }
 }
