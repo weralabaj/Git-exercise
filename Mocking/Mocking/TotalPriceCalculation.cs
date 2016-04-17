@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using Promotions;
+using Rhino.Mocks;
 
 namespace Tests
 {
@@ -10,6 +12,10 @@ namespace Tests
         [Test]
         public void change_my_name()
         {
+            var mock =
+                MockRepository.GenerateStub<IPromotionsService>();
+                    mock.Stub(x => x.GetPromotionFor(Arg<int>.Is.Anything))
+                    .Return(new BuyOneGetOneFree());
         }
 
         //Given that Bread is on 'BuyOneGetOneFor1Cent' promotion
@@ -19,5 +25,10 @@ namespace Tests
         public void change_my_name_too()
         {
         }
+    }
+
+    public interface IPromotionsService
+    {
+        IPromotion GetPromotionFor(int SKU);
     }
 }

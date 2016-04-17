@@ -1,10 +1,7 @@
 ﻿namespace Domain
 {
-    public class PromotionsService
+    public interface PromotionsService
     {
-        public IPromotion GetPromotionFor(int SKU)
-        {
-            return null;
-        }
+        IPromotion GetPromotionFor(int SKU);
     }
 }
