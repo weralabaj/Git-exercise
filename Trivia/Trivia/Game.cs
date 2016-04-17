@@ -32,13 +32,8 @@ namespace UglyTrivia
                 popQuestions.AddLast("Pop Question " + i);
                 scienceQuestions.AddLast(("Science Question " + i));
                 sportsQuestions.AddLast(("Sports Question " + i));
-                rockQuestions.AddLast(createRockQuestion(i));
+                rockQuestions.AddLast("Rock Question " + i);
             }
-        }
-
-        public String createRockQuestion(int index)
-        {
-            return "Rock Question " + index;
         }
 
         public bool add(String playerName)
@@ -129,16 +124,20 @@ namespace UglyTrivia
 
         private String currentCategory()
         {
-            if (places[currentPlayer] == 0) return "Pop";
-            if (places[currentPlayer] == 4) return "Pop";
-            if (places[currentPlayer] == 8) return "Pop";
-            if (places[currentPlayer] == 1) return "Science";
-            if (places[currentPlayer] == 5) return "Science";
-            if (places[currentPlayer] == 9) return "Science";
-            if (places[currentPlayer] == 2) return "Sports";
-            if (places[currentPlayer] == 6) return "Sports";
-            if (places[currentPlayer] == 10) return "Sports";
+            if (places[currentPlayer] > 10) return "Rock";
+            if (places[currentPlayer]%4 == 0) return "Pop";
+            if (places[currentPlayer]%4 == 1) return "Science";
+            if (places[currentPlayer]%4 == 2) return "Sports";
             return "Rock";
+        }
+
+        private String currentCategoryDifferentWay()
+        {
+            var questions = new[]
+            {
+                "Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports", "Rock",
+            };
+            return questions[places[currentPlayer]];
         }
 
         public bool wasCorrectlyAnswered()
